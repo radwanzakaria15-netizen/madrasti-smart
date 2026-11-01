@@ -64,3 +64,75 @@
 .quick-actions a{display:inline-flex;align-items:center;gap:6px}
 .dashboard-footer{display:flex;align-items:center;justify-content:center;gap:7px}
 @media(max-width:760px){.side-link>svg{flex-basis:25px}.welcome-illustration{opacity:.16}}
+
+/* Refined visual system */
+:root{--ink:#26324b;--muted:#78849a;--paper:#f8f9fd;--line:#e9edf5;--blue:#6675df;--coral:#f39a70;--green:#67b58a;--purple:#9383df}
+html,body{background:radial-gradient(ellipse at 85% 0%,#f1efff 0,transparent 34%),#f8f9fd}
+.dashboard-shell{max-width:1600px;grid-template-columns:270px minmax(0,1fr)}
+.sidebar{background:rgba(255,255,255,.92);border-left:1px solid #e9edf5;box-shadow:8px 0 35px #33415b06;padding:30px 20px 22px}
+.sidebar-brand{margin-bottom:48px}
+.brandmark{background:linear-gradient(145deg,#8d83e8,#6676dc);box-shadow:0 9px 20px #7773d638}
+.side-caption{letter-spacing:.2px}
+.side-nav{gap:7px}
+.side-link{min-height:48px;border:1px solid transparent;color:#667189;font-size:12px}
+.side-link>svg{background:#f2f4fa;color:#7883a2;transition:transform .2s,background .2s}
+.side-link:hover{background:#f5f4ff;color:#665bc0;border-color:#eeebff}
+.side-link:hover>svg{background:#e9e6ff;color:#665bc0;transform:translateX(-2px)}
+.side-link.active{background:linear-gradient(100deg,#f0efff,#f8f7ff);border:1px solid #e8e5ff;color:#6157b5;box-shadow:inset -3px 0 #8277df}
+.side-link.active>svg{background:#e4e0ff;color:#6258c2}
+.sidebar-note{background:linear-gradient(145deg,#f0efff,#f8f5ff);border-color:#e8e4ff;padding:19px 16px 23px}
+.sidebar-note strong{font-size:13px}
+.sidebar-note p{font-size:11px}
+.dashboard-main{padding:30px clamp(20px,4vw,58px) 28px}
+.dashboard-topbar{margin-bottom:25px}
+.eyebrow{letter-spacing:.1px;color:#8e91a8}
+.page-heading{font-size:24px;letter-spacing:-.3px}
+.teacher-chip{padding:8px 15px;border-radius:16px;box-shadow:0 8px 24px #29395a08}
+.teacher-avatar{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#e6f7ed,#f1fbf5)}
+.welcome-banner{min-height:270px;padding:34px 40px;border-radius:30px;background:linear-gradient(112deg,#fff0df 0%,#ffebe7 48%,#f0edff 100%);box-shadow:0 14px 35px #9c7c7d0c;margin-bottom:32px}
+.welcome-banner:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;left:9%;top:-190px;background:radial-gradient(circle,#ffffff88,transparent 68%);pointer-events:none}
+.welcome-copy{max-width:650px}
+.welcome-tag{background:#ffffffd9;border-color:#ffffff;color:#a96d4d;padding:7px 13px}
+.welcome-banner h1{font-size:clamp(27px,3.2vw,38px);letter-spacing:-.5px;margin-top:13px}
+.welcome-banner p{font-size:13px;max-width:590px}
+.btn{padding:12px 18px;border-radius:13px;background:linear-gradient(120deg,#8b7de0,#6c79dc);box-shadow:0 8px 18px #7773d638;transition:transform .2s,box-shadow .2s}
+.btn:hover{background:linear-gradient(120deg,#7b6fd1,#5d6bcf);transform:translateY(-2px);box-shadow:0 11px 22px #7773d64a}
+.banner-link{color:#776bc5}
+.welcome-illustration{width:235px;height:205px;margin-left:8px}
+.mascot{width:112px;height:112px;border-radius:34px;background:linear-gradient(145deg,#ffffffd9,#f7f3ffcc);border:1px solid #ffffff;box-shadow:0 18px 35px #8d7ab51f;transform:rotate(3deg)}
+.sun-shape{top:0;right:15px}
+.rainbow-shape{top:43px;left:0;width:155px}
+.cloud-a{top:0;left:77px;color:#fff}
+.section-heading{margin-bottom:15px}
+.section-heading h2{font-size:19px;color:#303a55}
+.subtle-label{font-size:10px}
+.stats{gap:14px}
+.stat{position:relative;overflow:hidden;border:1px solid #e9edf5;border-radius:19px;padding:17px 18px;background:linear-gradient(150deg,#fff,#fdfdff);box-shadow:0 8px 22px #34415d08;transition:transform .2s,box-shadow .2s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 13px 25px #34415d12}
+.stat:after{content:"";position:absolute;width:78px;height:78px;border-radius:50%;left:-27px;bottom:-38px;background:currentColor;opacity:.045}
+.stat-icon{width:39px;height:39px;border-radius:13px}
+.stat-students{color:#e69b62}.stat-results{color:#62ad86}.stat-average{color:#d5a94d}.stat-subjects{color:#9180d6}
+.stat strong{font-size:28px;color:#293650}
+.stat>span:last-child{font-size:11px;color:#7e899d}
+.subjects-heading{margin-top:31px}
+.grid{gap:16px}
+.subject{min-height:205px;padding:21px 23px;border-radius:23px;box-shadow:0 8px 20px #34415d08;transition:transform .22s,box-shadow .22s}
+.subject:hover{transform:translateY(-5px);box-shadow:0 16px 30px #34415d13}
+.subject.arabic{background:linear-gradient(135deg,#fff5eb,#ffebe3);border-color:#f5e5d9}
+.subject.math{background:linear-gradient(135deg,#eaf8f0,#e8f5f7);border-color:#deeee6}
+.subject-icon{width:52px;height:52px;border-radius:17px;background:#ffffffd9;box-shadow:0 7px 15px #9a785012}
+.subject-label{font-size:10px;margin-top:12px}
+.subject h3{font-size:21px;margin-top:1px}
+.subject p{font-size:11px;max-width:470px}
+.subject-bottom{margin-top:15px}
+.subject-decoration{font-size:145px;left:13px;bottom:-48px;opacity:.72}
+.quick-panel{margin-top:19px;border-radius:20px;padding:17px 20px;box-shadow:0 8px 22px #34415d07}
+.quick-symbol{width:42px;height:42px;border-radius:14px;background:#f1efff;color:#8175d5}
+.quick-panel h3{font-size:12px}
+.quick-panel p{font-size:10px}
+.quick-actions a{padding:9px 12px;border-radius:11px;background:#fafaff;border-color:#ecebfa;color:#6d65b2;transition:background .2s,transform .2s}
+.quick-actions a:hover{background:#f0efff;transform:translateY(-2px)}
+.dashboard-footer{margin-top:23px;color:#9299aa}
+a:focus-visible,button:focus-visible{outline:3px solid #8c83e5;outline-offset:3px}
+@media(max-width:1050px){.dashboard-shell{grid-template-columns:225px minmax(0,1fr)}.dashboard-main{padding-inline:24px}.welcome-banner{padding:27px}.welcome-illustration{transform:scale(.9)}}
+@media(max-width:760px){.sidebar{box-shadow:0 5px 20px #33415b08}.sidebar-brand{margin-bottom:13px}.dashboard-main{padding:18px 13px 25px}.page-heading{font-size:20px}.welcome-banner{min-height:225px;padding:21px 18px;border-radius:23px}.welcome-banner h1{font-size:24px}.welcome-banner p{font-size:11px}.welcome-illustration{left:-38px;bottom:-34px}.stat{border-radius:16px}.subject{min-height:185px;border-radius:20px}.quick-panel{border-radius:17px}}
