@@ -39,3 +39,28 @@
 @media(max-width:1050px){.dashboard-shell{grid-template-columns:220px minmax(0,1fr)}.sidebar{padding-inline:15px}.dashboard-main{padding-inline:23px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.welcome-illustration{width:170px;transform:scale(.85);transform-origin:center}}
 @media(max-width:760px){.dashboard-shell{display:block}.sidebar{position:relative;height:auto;min-height:0;padding:13px 14px;display:block}.sidebar-brand{margin:0 0 12px}.side-caption,.sidebar-note,.sidebar-foot{display:none}.side-nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px}.side-link{white-space:nowrap;padding:8px 10px;font-size:10px}.side-link>span{width:25px;height:25px;font-size:14px}.dashboard-main{padding:18px 13px 24px}.dashboard-topbar{margin-bottom:16px}.page-heading{font-size:18px}.welcome-banner{padding:20px 17px;min-height:220px}.welcome-copy{max-width:100%}.welcome-banner h1{font-size:23px}.welcome-banner p{font-size:10px}.welcome-illustration{position:absolute;left:-45px;bottom:-28px;opacity:.2;transform:scale(.9)}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{padding:11px}.stat strong{font-size:22px}.grid{grid-template-columns:1fr}.subject{min-height:175px}.quick-panel{align-items:flex-start;flex-direction:column}.quick-actions{width:100%}.quick-actions a{flex:1;text-align:center}.shell{padding:18px 14px 45px}.hero{padding:22px}.hero-art{font-size:48px}.cards{grid-template-columns:repeat(2,1fr)}.topbar{align-items:flex-start}.brand{font-size:19px}}
 @media(max-width:380px){.teacher-chip{padding:5px 8px}.teacher-chip small{display:none}.welcome-banner{padding:17px}.welcome-banner h1{font-size:20px}.stats{gap:7px}.stat>span:last-child{font-size:9px}}
+
+/* Consistent Lucide icon system for the dashboard */
+.side-link{gap:12px}
+.side-link>svg{width:20px;height:20px;flex:0 0 30px;padding:5px;border-radius:10px;background:#f8f5f0;color:#7b82a0;box-sizing:content-box}
+.side-link:hover>svg,.side-link.active>svg{background:#ffe2c4;color:#b96f39}
+.note-stars{display:flex;align-items:center}
+.note-mascot{display:grid;place-items:center;color:#8e83d5}
+.teacher-avatar svg,.stat-icon svg,.subject-icon svg,.quick-symbol svg{display:block}
+.teacher-avatar{color:#5b9c79}
+.welcome-tag{align-items:center;gap:6px}
+.welcome-illustration svg{display:block}
+.sun-shape{color:#efb64e}
+.rainbow-shape{position:absolute;top:40px;left:10px;width:145px}
+.mascot{color:#8a7bd0}
+.sparkle{display:grid;place-items:center}
+.cloud{display:grid;place-items:center}
+.section-heading h2{display:flex;align-items:center;gap:7px}
+.section-heading h2 svg{color:#9b8bd8}
+.stat-icon{color:#6974ce}
+.subject-icon{color:#d28a53}
+.math .subject-icon{color:#58a27a}
+.subject-arrow,.subject-bottom svg{display:flex;align-items:center}
+.quick-actions a{display:inline-flex;align-items:center;gap:6px}
+.dashboard-footer{display:flex;align-items:center;justify-content:center;gap:7px}
+@media(max-width:760px){.side-link>svg{flex-basis:25px}.welcome-illustration{opacity:.16}}
