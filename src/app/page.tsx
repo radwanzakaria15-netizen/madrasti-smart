@@ -5,7 +5,7 @@ import {
   Home as HomeIcon, BookOpen, Calculator, Users, Target, Trophy,
   GraduationCap, Sparkles, ChartNoAxesColumnIncreasing, Pencil,
   Palette, Rocket, Lightbulb, Plus, ArrowLeft, ArrowUpRight,
-  Sun, Cloud, Star, School, Brain, NotebookPen
+  Sun, Cloud, Star, School
 } from "lucide-react";
 
 export default async function Home() {
@@ -34,7 +34,7 @@ export default async function Home() {
       <header className="dashboard-topbar"><div><div className="eyebrow">أهلًا بك في عالم التعلّم الممتع</div><div className="page-heading">لوحة الأستاذ</div></div><div className="teacher-chip"><span className="teacher-avatar"><GraduationCap size={22}/></span><span><strong>فضاء الأستاذ</strong><small>إدارة الفصل والتعلّم</small></span></div></header>
       <section className="welcome-banner">
         <div className="welcome-copy"><span className="welcome-tag"><Sparkles size={15}/> نكتشف، نتعلّم، ننجح</span><h1>مرحبًا بك في مَدْرَسَتي الذكية!</h1><p>هنا تتحول الدروس إلى مغامرات ممتعة. اختر المادة، حضّر نشاطًا شيقًا، وتابع رحلة أبطالك الصغار نحو النجاح.</p><div className="actions"><Link className="btn" href="/activities">اكتشف الأنشطة <ArrowLeft size={16}/></Link><Link className="banner-link" href="/students">إدارة التلاميذ</Link></div></div>
-        <div className="welcome-illustration" aria-hidden="true"><div className="sun-shape"><Sun size={38}/></div><div className="rainbow-shape"><svg viewBox="0 0 150 100" role="presentation"><path d="M12 92a63 63 0 0 1 126 0" fill="none" stroke="#f3a46b" strokeWidth="13"/><path d="M27 92a48 48 0 0 1 96 0" fill="none" stroke="#e9c65f" strokeWidth="13"/><path d="M42 92a33 33 0 0 1 66 0" fill="none" stroke="#8bc9a2" strokeWidth="13"/></svg></div><div className="mascot"><School size={62}/></div><span className="sparkle sparkle-a"><Star size={21}/></span><span className="sparkle sparkle-b"><Sparkles size={22}/></span><span className="cloud cloud-a"><Cloud size={34}/></span></div>
+        <div className="welcome-illustration" aria-hidden="true"><div className="sun-shape"><Sun size={38}/></div><div className="book-shape"><BookOpen size={54}/></div><div className="mascot"><School size={62}/></div><span className="sparkle sparkle-a"><Star size={21}/></span><span className="sparkle sparkle-b"><Sparkles size={22}/></span><span className="cloud cloud-a"><Cloud size={34}/></span></div>
       </section>
       <div className="section-heading"><div><div className="eyebrow">أرقام وإنجازات الفصل</div><h2>رحلة التعلّم بالأرقام <ChartNoAxesColumnIncreasing size={18}/></h2></div><span className="subtle-label">تتحدّث تلقائيًا من بيانات المنصة</span></div>
       <section className="stats">
