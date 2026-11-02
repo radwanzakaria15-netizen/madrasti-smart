@@ -149,3 +149,43 @@ a:focus-visible,button:focus-visible{outline:3px solid #8c83e5;outline-offset:3p
 .sparkle-a{color:#dca44d}
 .sparkle-b{color:#9488d8}
 @media(max-width:760px){.book-shape{left:8px;top:60px}.sun-shape{right:25px}}
+
+
+/* Clean headings and refreshed subject learning spaces */
+h1,h2,h3,h4,h5,h6,.section-title{ text-decoration:none!important; border-bottom:0!important; }
+h1::after,h2::after,h3::after,.section-title::after{content:none!important;display:none!important}
+.subject-page{direction:rtl;max-width:1240px;margin:0 auto;padding:30px clamp(16px,4vw,48px) 64px;min-height:100vh;color:#293650}
+.subject-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.subject-back{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid #e8ebf3;background:#fff;border-radius:13px;color:#69748c;font-size:12px;font-weight:800;transition:.2s}
+.subject-back:hover{background:#f2f1ff;color:#655bc0}
+.subject-brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:900}
+.subject-brand>span{width:37px;height:37px;display:grid;place-items:center;border-radius:12px;background:#eeedff;color:#766bd0}
+.subject-hero{min-height:205px;border-radius:26px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;position:relative;border:1px solid #eee8f3}
+.subject-hero.arabic{background:linear-gradient(115deg,#fff2e5,#ffebe8 60%,#f5efff)}
+.subject-hero.math{background:linear-gradient(115deg,#e9f8ef,#e9f5f7 60%,#eff0ff)}
+.subject-hero-copy{position:relative;z-index:1}
+.subject-kicker{display:inline-block;padding:6px 11px;border-radius:30px;background:#ffffffc9;color:#8876bc;font-size:10px;font-weight:900}
+.subject-hero h1{font-size:clamp(27px,4vw,38px);font-weight:900;margin:11px 0 4px}
+.subject-hero p{margin:0;color:#727e92;font-size:13px;line-height:2}
+.subject-hero-icon{width:120px;height:120px;border-radius:34px;background:#ffffffb8;display:grid;place-items:center;color:#9a83d7;box-shadow:0 15px 35px #655b8c12;transform:rotate(-7deg)}
+.subject-hero.math .subject-hero-icon{color:#58a27d}
+.subject-section-head{display:flex;justify-content:space-between;align-items:end;margin:30px 0 16px}
+.subject-section-head>div>span{font-size:10px;font-weight:900;color:#8f86c9}
+.subject-section-head h2{font-size:21px;font-weight:900;margin:2px 0 0}
+.subject-section-head p{font-size:11px;color:#8791a4;margin:3px 0 0}
+.subject-count{font-size:10px;font-weight:800;color:#858da0;background:#fff;border:1px solid #e9edf4;padding:7px 12px;border-radius:30px}
+.subject-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.subject-tile{background:#fff;border:1px solid #e9edf4;border-radius:20px;padding:19px;min-height:205px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
+.subject-tile:hover{transform:translateY(-4px);box-shadow:0 14px 28px #33415d10;border-color:#dcd9f5}
+.subject-tile-top{display:flex;justify-content:space-between;align-items:center}
+.subject-tile-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:#f1efff;color:#786dcc}
+.subject-tile-icon svg{width:23px;height:23px}
+.subject-tile-number{font-size:11px;font-weight:900;color:#b4b9c7}
+.subject-tile-tag{font-size:9px;font-weight:900;color:#8b83c8;margin-top:13px}
+.subject-tile h3{font-size:17px;font-weight:900;margin:2px 0 3px}
+.subject-tile p{font-size:10px;line-height:1.9;color:#7d899c;margin:0 0 14px}
+.subject-tile-link{display:flex;align-items:center;gap:7px;margin-top:auto;font-size:10px;font-weight:900;color:#746ac5}
+.subject-page:has(.subject-hero.math) .subject-tile-icon{background:#eaf7ef;color:#56a17a}
+.subject-page:has(.subject-hero.math) .subject-tile-tag,.subject-page:has(.subject-hero.math) .subject-tile-link{color:#559875}
+@media(max-width:850px){.subject-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.subject-page{padding:18px 13px 40px}.subject-header{margin-bottom:18px}.subject-brand{font-size:12px}.subject-hero{padding:23px 19px;min-height:175px;border-radius:21px}.subject-hero h1{font-size:27px}.subject-hero p{font-size:11px;max-width:240px}.subject-hero-icon{width:78px;height:78px;border-radius:24px}.subject-hero-icon svg{width:43px;height:43px}.subject-grid{grid-template-columns:1fr;gap:10px}.subject-tile{min-height:180px}.subject-section-head h2{font-size:18px}}
