@@ -1,15 +1,21 @@
 import Link from "next/link";
-import { BookOpen, PencilLine, SpellCheck, ClipboardCheck, Hash, X, Calculator, Brain, FileQuestion, ArrowRight, Home, GraduationCap } from "lucide-react";
+import { BookOpen, PencilLine, SpellCheck, ClipboardCheck, Hash, X, Calculator, Brain, FileQuestion, ArrowRight, Home, GraduationCap, ALargeSmall, AudioLines, PenTool, Languages, CaseSensitive, Sparkles, FileText, AlignLeft, ListChecks } from "lucide-react";
 
-const data: Record<string, {title:string;desc:string;intro:string;items:{title:string;desc:string;icon:React.ReactNode;href:string;tag:string}[]}> = {
- arabic:{title:"اللغة العربية",desc:"رحلة ممتعة لاكتشاف الحروف والكلمات والقراءة والكتابة.",intro:"اختر المهارة التي تريد العمل عليها مع تلاميذك",items:[
- {title:"الحروف الهجائية",desc:"التعرّف على الحروف وأشكالها وأصواتها.",icon:<BookOpen/>,href:"/activities?skill=arabic_letters",tag:"القراءة والتعرّف"},
- {title:"القراءة والكلمات",desc:"قراءة المقاطع والكلمات وبناء جمل قصيرة.",icon:<SpellCheck/>,href:"/activities?skill=reading",tag:"مهارات القراءة"},
- {title:"الخط والكتابة",desc:"التدرّب على كتابة الحروف والكلمات بوضوح.",icon:<PencilLine/>,href:"/activities?skill=handwriting",tag:"التعبير الكتابي"},
- {title:"القواعد والتراكيب",desc:"قواعد مبسطة مع أمثلة وتطبيقات مناسبة للمستوى.",icon:<Brain/>,href:"/activities?skill=grammar",tag:"الفهم والتطبيق"},
- {title:"التقييمات",desc:"أسئلة قصيرة لقياس مدى استيعاب الدروس.",icon:<ClipboardCheck/>,href:"/activities?skill=arabic_quiz",tag:"قياس التعلّم"}
+type Item={title:string;desc:string;icon:React.ReactNode;href:string;tag:string};
+type SubjectData={title:string;desc:string;intro:string;items:Item[];};
+const data:Record<string,SubjectData>={
+ arabic:{title:"اللغة العربية",desc:"مساحة متكاملة لتعليم القراءة والكتابة والإملاء والقواعد، خطوة بخطوة.",intro:"اختر المجال التعليمي، ثم انتقل إلى المهارة التي تريد تدريب التلاميذ عليها.",items:[
+ {title:"الحروف الهجائية",desc:"التعرّف على الحروف وأشكالها وأصواتها، وكتابتها في مواضع الكلمة.",icon:<ALargeSmall/>,href:"/activities?skill=arabic_letters",tag:"الحرف وأشكاله"},
+ {title:"الحركات والتشكيل",desc:"الفتحة والضمة والكسرة والسكون والشدة والتنوين مع أمثلة وتدريبات.",icon:<AudioLines/>,href:"/activities?skill=harakat",tag:"الضبط والنطق"},
+ {title:"الإملاء والتصحيح",desc:"التدرّب على كتابة الكلمات والجمل والفقرات والنصوص، ومراجعة الأخطاء.",icon:<SpellCheck/>,href:"/activities?skill=dictation",tag:"الكتابة السليمة"},
+ {title:"أقسام الكلام",desc:"تمييز الاسم والفعل والحرف داخل الكلمات والجمل.",icon:<Languages/>,href:"/activities?skill=parts_of_speech",tag:"أساسيات اللغة"},
+ {title:"المذكر والمؤنث",desc:"التعرّف على علامات التذكير والتأنيث والتمييز بينهما.",icon:<CaseSensitive/>,href:"/activities?skill=gender",tag:"بناء الكلمات"},
+ {title:"المفرد والمثنى",desc:"فهم المفرد والمثنى وكيفية تحويل الاسم من مفرد إلى مثنى.",icon:<ListChecks/>,href:"/activities?skill=dual",tag:"التثنية"},
+ {title:"القراءة والكلمات",desc:"قراءة الكلمات وفهم معانيها واستعمالها في جمل مفيدة.",icon:<BookOpen/>,href:"/activities?skill=reading",tag:"الفهم القرائي"},
+ {title:"الخط والكتابة",desc:"التدرّب على رسم الحروف وكتابة الكلمات بخط واضح.",icon:<PencilLine/>,href:"/activities?skill=handwriting",tag:"مهارات الكتابة"},
+ {title:"التقييمات",desc:"اختبارات قصيرة تجمع المهارات التي تعلمها التلميذ.",icon:<ClipboardCheck/>,href:"/activities?skill=arabic_quiz",tag:"قياس التعلّم"}
  ]},
- math:{title:"الرياضيات",desc:"نكتشف عالم الأعداد ونفهم العمليات ونحلّ المسائل خطوة بخطوة.",intro:"اختر المجال الرياضي الذي تريد تدريسه",items:[
+ math:{title:"الرياضيات",desc:"نكتشف عالم الأعداد ونفهم العمليات ونحلّ المسائل خطوة بخطوة.",intro:"اختر المجال الرياضي الذي تريد تدريسه.",items:[
  {title:"الأعداد والأرقام",desc:"التعرّف على الأعداد والعدّ والمقارنة والترتيب.",icon:<Hash/>,href:"/activities?skill=numbers",tag:"أساسيات الأعداد"},
  {title:"الجمع والطرح",desc:"فهم الجمع والطرح والتدرّب على المسائل البسيطة.",icon:<Calculator/>,href:"/activities?skill=addition_subtraction",tag:"العمليات الأساسية"},
  {title:"الضرب والقسمة",desc:"اكتشاف معنى الضرب والقسمة والتدرّب عليهما.",icon:<X/>,href:"/activities?skill=multiplication",tag:"الحساب"},
@@ -17,7 +23,6 @@ const data: Record<string, {title:string;desc:string;intro:string;items:{title:s
  {title:"التقييمات",desc:"تمارين متنوعة لمتابعة مستوى التلميذ.",icon:<ClipboardCheck/>,href:"/activities?skill=math_quiz",tag:"قياس التعلّم"}
  ]}
 };
-
 export default async function Subject({params}:{params:Promise<{subject:string}>}) {
  const {subject}=await params; const d=data[subject];
  if(!d)return <main className="subject-page"><Link href="/" className="subject-back"><Home size={17}/> العودة إلى لوحة الأستاذ</Link><h1>المادة غير موجودة</h1></main>;
@@ -26,5 +31,6 @@ export default async function Subject({params}:{params:Promise<{subject:string}>
   <section className={`subject-hero ${subject}`}><div className="subject-hero-copy"><span className="subject-kicker">فضاء التعلّم</span><h1>{d.title}</h1><p>{d.desc}</p></div><div className="subject-hero-icon">{subject==="arabic"?<BookOpen size={66}/>:<Calculator size={66}/>}</div></section>
   <div className="subject-section-head"><div><span>محتوى المادة</span><h2>الأقسام التعليمية</h2><p>{d.intro}</p></div><span className="subject-count">{d.items.length} أقسام</span></div>
   <section className="subject-grid">{d.items.map((it,i)=><Link href={it.href} className="subject-tile" key={it.title}><div className="subject-tile-top"><span className="subject-tile-icon">{it.icon}</span><span className="subject-tile-number">{String(i+1).padStart(2,"0")}</span></div><span className="subject-tile-tag">{it.tag}</span><h3>{it.title}</h3><p>{it.desc}</p><span className="subject-tile-link">فتح القسم <ArrowRight size={16}/></span></Link>)}</section>
+  {subject==="arabic"&&<section className="arabic-tools"><div className="arabic-tools-heading"><Sparkles size={20}/><div><h2>ورشة الإملاء</h2><p>مساحة مخصصة للتدرب على كتابة نصوص بمستويات مختلفة.</p></div></div><div className="dictation-types"><div><FileText/><strong>كلمة</strong><span>تدريب على كتابة كلمة صحيحة</span></div><div><PencilLine/><strong>جملة</strong><span>كتابة جملة مع مراعاة القواعد</span></div><div><AlignLeft/><strong>فقرة ونص</strong><span>تنظيم الأفكار ومراجعة الكتابة</span></div><div><SpellCheck/><strong>تصحيح الأخطاء</strong><span>مراجعة النص وتحديد مواضع الخطأ</span></div></div><p className="dictation-note">ملاحظة: أنشطة الإملاء التفاعلية الحالية تدريبية. توليد المحتوى والتصحيح بالذكاء الاصطناعي يحتاجان إلى ربط خدمة ذكاء اصطناعي آمنة من جهة الخادم.</p></section>}
  </main>;
 }
