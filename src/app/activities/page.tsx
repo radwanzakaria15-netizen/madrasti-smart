@@ -2,23 +2,71 @@
 import {useMemo,useState} from "react";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
+import {ArrowRight,BookOpen,Calculator,CheckCircle2,Lightbulb,Volume2,RotateCcw,Trophy,Star,ArrowLeft,GraduationCap} from "lucide-react";
 
-const questions:any={
- arabic_letters:{title:"تمييز الحروف",q:"أي حرف تبدأ به كلمة بَيت؟",choices:["ب","ت","ث"],answer:"ب",hint:"استمع إلى الصوت الأول في كلمة بَيت."},
- numbers:{title:"تعلم الأرقام",q:"ما العدد الذي يأتي بعد 7؟",choices:["6","8","9"],answer:"8",hint:"عدّ: 7 ثم العدد الذي يليه."},
- multiplication:{title:"جدول الضرب",q:"كم يساوي 3 × 2؟",choices:["5","6","8"],answer:"6",hint:"الضرب هنا يعني 3 مجموعات، في كل مجموعة شيئان."},
- operations:{title:"الجمع",q:"كم يساوي 5 + 3؟",choices:["7","8","9"],answer:"8",hint:"ابدأ من 5 وعدّ ثلاث خطوات إلى الأمام."},
- word_problems:{title:"مسألة حياتية",q:"مع ليلى 4 أقلام واشترت قلمين. كم قلمًا أصبح معها؟",choices:["5","6","7"],answer:"6",hint:"عندما نضيف أقلامًا نستخدم الجمع."},
- grammar:{title:"تمييز الكلمة",q:"أي كلمة تدل على فعل؟",choices:["كتب","كتاب","قلم"],answer:"كتب",hint:"الفعل يدل على حدث."},
- handwriting:{title:"تدريب الخط",q:"اختر الحرف الذي نتدرب على كتابته اليوم.",choices:["ب","م","س"],answer:"ب",hint:"تذكر أن للحرف باء نقطة واحدة أسفل جسمه."},
- arabic_quiz:{title:"اختبار اللغة العربية",q:"أي كلمة تبدأ بحرف م؟",choices:["موز","باب","قلم"],answer:"موز",hint:"ابحث عن الحرف الأول."},
- math_quiz:{title:"اختبار الرياضيات",q:"كم يساوي 10 - 4؟",choices:["5","6","7"],answer:"6",hint:"ابدأ من 10 وارجع أربع خطوات."}
+type Question={q:string;choices:string[];answer:string;hint:string;explain:string;visual?:string};
+const lessons:Record<string,{title:string;subject:string;intro:string;questions:Question[]}> = {
+ arabic_letters:{title:"الحروف الهجائية",subject:"العربية",intro:"تعرّف على الحروف وأصواتها من خلال أمثلة قصيرة.",questions:[
+ {q:"أي حرف تبدأ به كلمة «بَيت»؟",choices:["ب","ت","ث"],answer:"ب",hint:"انطق كلمة بيت ببطء وانتبه إلى صوتها الأول.",explain:"كلمة «بيت» تبدأ بصوت حرف الباء."},
+ {q:"اختر الكلمة التي تبدأ بحرف س.",choices:["سمكة","قمر","باب"],answer:"سمكة",hint:"ابحث عن الكلمة التي تسمع في بدايتها صوت السين.",explain:"كلمة «سمكة» تبدأ بحرف السين."},
+ {q:"أي حرف يأتي بعد الألف؟",choices:["ج","ب","د"],answer:"ب",hint:"رتّب الحروف الأولى من الهجاء.",explain:"ترتيب البداية هو: أ، ب، ت، ث."}]},
+ reading:{title:"القراءة والكلمات",subject:"العربية",intro:"اقرأ الكلمات واختر المعنى أو الكلمة المناسبة.",questions:[
+ {q:"أكمل الجملة: أشرب الماء في ...",choices:["الكأس","الحذاء","الكتاب"],answer:"الكأس",hint:"فكّر في الشيء الذي نضع فيه الماء للشرب.",explain:"نشرب الماء في الكأس."},
+ {q:"ما جمع كلمة «كتاب»؟",choices:["كاتب","كتب","مكتبة"],answer:"كتب",hint:"عندما يكون لدينا أكثر من كتاب نستخدم صيغة الجمع.",explain:"جمع كتاب هو كتب."},
+ {q:"اختر الكلمة التي تدل على حيوان.",choices:["شجرة","أسد","كرسي"],answer:"أسد",hint:"ابحث عن اسم كائن حي يتحرك.",explain:"الأسد حيوان."}]},
+ handwriting:{title:"الخط والكتابة",subject:"العربية",intro:"لاحظ شكل الحرف ثم اختر الكلمة المكتوبة بالحرف المطلوب.",questions:[
+ {q:"أي كلمة تحتوي على حرف الباء في أولها؟",choices:["باب","دار","نور"],answer:"باب",hint:"حرف الباء له نقطة أسفل جسمه.",explain:"كلمة باب تبدأ بحرف الباء."},
+ {q:"أين تقع نقطة حرف التاء؟",choices:["فوق الحرف","تحت الحرف","لا توجد نقطة"],answer:"فوق الحرف",hint:"قارن شكل التاء بالباء والثاء.",explain:"حرف التاء له نقطتان فوقه."},
+ {q:"اختر الكلمة التي تنتهي بحرف الميم.",choices:["قلم","بيت","نور"],answer:"قلم",hint:"انظر إلى آخر حرف في كل كلمة.",explain:"آخر حرف في كلمة قلم هو الميم."}]},
+ grammar:{title:"القواعد والتراكيب",subject:"العربية",intro:"اكتشف أنواع الكلمات وتدرّب على استعمالها.",questions:[
+ {q:"أي كلمة تدل على فعل؟",choices:["كتب","كتاب","قلم"],answer:"كتب",hint:"الفعل يدل على حدث أو عمل.",explain:"«كتب» فعل يدل على حدث الكتابة."},
+ {q:"في جملة «الشمس مشرقة»، ما نوع كلمة الشمس؟",choices:["اسم","فعل","حرف"],answer:"اسم",hint:"الشمس شيء نسمّيه، وليست حدثًا.",explain:"الشمس اسم، ومشرقة خبر."},
+ {q:"اختر الفعل من الكلمات الآتية.",choices:["يلعب","ملعب","لاعب"],answer:"يلعب",hint:"ابحث عن كلمة تدل على حدوث اللعب.",explain:"«يلعب» فعل مضارع."}]},
+ arabic_quiz:{title:"تقييم اللغة العربية",subject:"العربية",intro:"أجب عن الأسئلة لتراجع ما تعلمته.",questions:[
+ {q:"ما الحرف الأول من كلمة «مدرسة»؟",choices:["م","د","ر"],answer:"م",hint:"اقرأ الكلمة من اليمين إلى اليسار.",explain:"تبدأ كلمة مدرسة بحرف الميم."},
+ {q:"أي كلمة هي فعل؟",choices:["يجري","نهر","ماء"],answer:"يجري",hint:"الفعل يدل على حدث.",explain:"يجري فعل مضارع."},
+ {q:"ما جمع كلمة «قلم»؟",choices:["أقلام","قلمان","قالم"],answer:"أقلام",hint:"فكر في صيغة الجمع الشائعة.",explain:"جمع قلم هو أقلام."}]},
+ numbers:{title:"الأعداد والأرقام",subject:"الرياضيات",intro:"تدرّب على العدّ وترتيب الأعداد ومقارنتها.",questions:[
+ {q:"ما العدد الذي يأتي بعد 7؟",choices:["6","8","9"],answer:"8",hint:"عدّ تصاعديًا ابتداءً من سبعة.",explain:"بعد 7 يأتي العدد 8."},
+ {q:"أي عدد أكبر؟",choices:["12","9","5"],answer:"12",hint:"قارن الأعداد بحسب قيمتها.",explain:"12 أكبر من 9 و5."},
+ {q:"كم وحدة في العدد 14؟",choices:["4","1","14"],answer:"4",hint:"انظر إلى منزلة الآحاد.",explain:"في العدد 14 أربع وحدات وعشرة واحدة."}]},
+ addition_subtraction:{title:"الجمع والطرح",subject:"الرياضيات",intro:"استخدم العدّ لفهم الجمع والطرح خطوة بخطوة.",questions:[
+ {q:"كم يساوي 5 + 3؟",choices:["7","8","9"],answer:"8",hint:"ابدأ من 5 وأضف ثلاث خطوات.",explain:"5 + 3 = 8."},
+ {q:"كم يساوي 9 − 4؟",choices:["4","5","6"],answer:"5",hint:"ابدأ من 9 وارجع أربع خطوات.",explain:"9 − 4 = 5."},
+ {q:"لدى سلمى 6 تفاحات وأعطت صديقتها 2. كم بقي؟",choices:["3","4","8"],answer:"4",hint:"عندما نعطي بعض الأشياء ينقص العدد.",explain:"6 − 2 = 4 تفاحات."}]},
+ multiplication:{title:"الضرب والقسمة",subject:"الرياضيات",intro:"افهم الضرب على أنه مجموعات متساوية، ثم جرّب.",questions:[
+ {q:"كم يساوي 3 × 2؟",choices:["5","6","8"],answer:"6",hint:"اجمع 2 ثلاث مرات.",explain:"2 + 2 + 2 = 6، إذن 3 × 2 = 6."},
+ {q:"كم يساوي 4 × 3؟",choices:["7","12","16"],answer:"12",hint:"أربع مجموعات في كل واحدة ثلاثة.",explain:"3 + 3 + 3 + 3 = 12."},
+ {q:"وزّع 10 حبات بالتساوي على مجموعتين. كم في كل مجموعة؟",choices:["4","5","6"],answer:"5",hint:"القسمة تعني التوزيع بالتساوي.",explain:"10 ÷ 2 = 5."}]},
+ word_problems:{title:"حلّ المسائل",subject:"الرياضيات",intro:"اقرأ المسألة، حدّد المطلوب، ثم اختر العملية المناسبة.",questions:[
+ {q:"مع ليلى 4 أقلام واشترت قلمين. كم قلمًا أصبح معها؟",choices:["5","6","7"],answer:"6",hint:"اشترت أقلامًا إضافية، هل نستخدم الجمع أم الطرح؟",explain:"4 + 2 = 6 أقلام."},
+ {q:"في الحافلة 8 ركاب، نزل 3. كم بقي؟",choices:["5","6","11"],answer:"5",hint:"عدد الركاب نقص بعد النزول.",explain:"8 − 3 = 5 ركاب."},
+ {q:"لدى المعلم 3 علب، في كل علبة 4 أقلام. كم قلمًا لديه؟",choices:["7","12","9"],answer:"12",hint:"هناك مجموعات متساوية؛ استخدم الضرب.",explain:"3 × 4 = 12 قلمًا."}]},
+ math_quiz:{title:"تقييم الرياضيات",subject:"الرياضيات",intro:"اختبر فهمك في الحساب والأعداد والمسائل.",questions:[
+ {q:"كم يساوي 10 − 4؟",choices:["5","6","7"],answer:"6",hint:"ارجع أربع خطوات من العدد عشرة.",explain:"10 − 4 = 6."},
+ {q:"ما العدد الأكبر؟",choices:["18"," आठ","13"],answer:"18",hint:"قارن منزلة العشرات أولًا.",explain:"18 أكبر من 13 و8."},
+ {q:"كم يساوي 5 × 2؟",choices:["7","10","12"],answer:"10",hint:"اجمع العدد 2 خمس مرات.",explain:"5 × 2 = 10."}]}
 };
+const fallback=lessons.addition_subtraction;
 export default function Activities(){
- const params=useSearchParams(); const skill=params.get("skill")||"operations"; const item=questions[skill]||questions.operations;
- const [choice,setChoice]=useState("");const [result,setResult]=useState("");const [hint,setHint]=useState(false);
- async function check(){if(!choice)return;const correct=choice===item.answer;setResult(correct?"أحسنت! إجابة صحيحة.":"محاولة جيدة، لا بأس من الخطأ. "+item.hint);
-   try{await fetch("/api/assessment",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subject:skill.startsWith("math")||["numbers","multiplication","operations","word_problems"].includes(skill)?"math":"arabic",skill,question:item.q,answer:choice,correct})});}catch{}
- }
- return <main className="shell"><header className="topbar"><Link href="/" className="pill">← الرئيسية</Link><div className="brand">مساحة التعلم</div></header><section className="panel" style={{maxWidth:700,margin:"35px auto"}}><div className="pill">{item.title}</div><h1 style={{fontSize:27,marginTop:20}}>{item.q}</h1><div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,margin:"25px 0"}}>{item.choices.map((c:string)=><button key={c} className={choice===c?"btn":"btn secondary"} onClick={()=>{setChoice(c);setResult("");}} style={{fontSize:22,padding:20}}>{c}</button>)}</div><div className="actions"><button className="btn" onClick={check}>تحقق من الإجابة</button><button className="btn ghost" onClick={()=>setHint(!hint)}>أحتاج إلى تلميح</button></div>{hint&&<div className="feedback">{item.hint}</div>}{result&&<div className="feedback">{result}</div>}<p style={{fontSize:12,color:"var(--muted)"}}>هذا نشاط أولي. حفظ النتائج يتطلب تسجيل التلميذ وربطه بحساب في قاعدة البيانات.</p></section></main>;
+ const params=useSearchParams();const skill=params.get("skill")||"addition_subtraction";const lesson=lessons[skill]||fallback;
+ const [index,setIndex]=useState(0);const [choice,setChoice]=useState("");const [checked,setChecked]=useState(false);const [hint,setHint]=useState(false);const [score,setScore]=useState(0);const [finished,setFinished]=useState(false);
+ const question=lesson.questions[index];const progress=finished?100:((index+(checked?1:0))/lesson.questions.length)*100;const correct=choice===question.answer;
+ function speak(){if(typeof window!=="undefined"&&"speechSynthesis"in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(question.q);u.lang="ar-SA";window.speechSynthesis.speak(u);}}
+ async function next(){if(!checked)return;if(index===lesson.questions.length-1){setFinished(true);return;}setIndex(v=>v+1);setChoice("");setChecked(false);setHint(false);}
+ function restart(){setIndex(0);setChoice("");setChecked(false);setHint(false);setScore(0);setFinished(false);}
+ async function check(){if(!choice||checked)return;setChecked(true);if(correct)setScore(v=>v+1);try{await fetch("/api/assessment",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subject:lesson.subject==="الرياضيات"?"math":"arabic",skill,question:question.q,answer:choice,correct})});}catch{}}
+ return <main className="learn-page">
+ <header className="learn-header"><Link href="/" className="learn-back"><ArrowRight size={17}/> لوحة الأستاذ</Link><div className="learn-brand"><span><GraduationCap size={20}/></span> مَدْرَسَتي الذكية</div></header>
+ <div className="learn-breadcrumb"><span>{lesson.subject}</span><ArrowLeft size={14}/><span>{lesson.title}</span></div>
+ <section className="learn-hero"><div><span className="learn-kicker">مساحة التعلّم التفاعلي</span><h1>{lesson.title}</h1><p>{lesson.intro}</p></div><div className="learn-hero-icon">{lesson.subject==="العربية"?<BookOpen size={48}/>:<Calculator size={48}/>}</div></section>
+ <div className="learn-progress-row"><span>تقدّم النشاط</span><strong>{finished?lesson.questions.length: index+1} / {lesson.questions.length}</strong></div><div className="learn-progress"><span style={{width:progress+"%"}}/></div>
+ {!finished?<section className="learn-card"><div className="learn-card-top"><span className="learn-step">السؤال {index+1}</span><button className="learn-icon-button" onClick={speak} aria-label="استمع إلى السؤال"><Volume2 size={18}/> استمع للسؤال</button></div>
+ <h2>{question.q}</h2><div className="learn-choices">{question.choices.map((c,i)=><button key={c} disabled={checked} className={"learn-choice "+(choice===c?"selected ":"")+(checked&&c===question.answer?"right ":"")+(checked&&choice===c&&!correct?"wrong":"")} onClick={()=>setChoice(c)}><span className="choice-letter">{["أ","ب","ج"][i]}</span>{c}{checked&&c===question.answer&&<CheckCircle2 size={19}/>}</button>)}</div>
+ <div className="learn-controls"><button className="learn-hint" onClick={()=>setHint(v=>!v)}><Lightbulb size={17}/> {hint?"إخفاء التلميح":"أعطني تلميحًا"}</button>{!checked?<button className="learn-primary" disabled={!choice} onClick={check}>تحقّق من إجابتي <ArrowLeft size={17}/></button>:<button className="learn-primary" onClick={next}>{index===lesson.questions.length-1?"عرض النتيجة":"السؤال التالي"} <ArrowLeft size={17}/></button>}</div>
+ {hint&&<div className="learn-hint-box"><Lightbulb size={18}/><p>{question.hint}</p></div>}
+ {checked&&<div className={"learn-feedback "+(correct?"success":"try-again")}><div className="feedback-title">{correct?<CheckCircle2 size={19}/>:<Lightbulb size={19}/>} {correct?"أحسنت! إجابة صحيحة":"محاولة جيدة، لنتعلّم معًا"}</div><p>{question.explain}</p></div>}
+ </section>:<section className="learn-card learn-result"><div className="result-icon"><Trophy size={42}/></div><span className="learn-kicker">اكتمل النشاط</span><h2>أحسنت، لقد أنهيت التمرين!</h2><div className="result-score"><strong>{score}</strong><span>من {lesson.questions.length}</span></div><p>{score===lesson.questions.length?"رائع! أتقنت جميع الأسئلة.":score>=2?"عمل جيد! راجع السؤال الذي أخطأت فيه وحاول مجددًا.":"بداية موفقة! أعد النشاط لتتدرّب أكثر."}</p><button className="learn-primary" onClick={restart}><RotateCcw size={17}/> أعد التمرين</button></section>}
+ <footer className="learn-footer"><Star size={15}/> تعلّم خطوة بخطوة، فالخطأ فرصة للفهم والتقدّم.</footer>
+ </main>;
 }
