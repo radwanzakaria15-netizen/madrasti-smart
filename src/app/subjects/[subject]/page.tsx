@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { BookOpen, PencilLine, SpellCheck, ClipboardCheck, Hash, X, Calculator, Brain, FileQuestion, ArrowRight, Home, GraduationCap, ALargeSmall, AudioLines, PenTool, Languages, CaseSensitive, Sparkles, FileText, AlignLeft, ListChecks } from "lucide-react";
+import { BookOpen, PencilLine, SpellCheck, ClipboardCheck, Hash, X, Calculator, FileQuestion, ArrowRight, Home, GraduationCap, ALargeSmall, AudioLines, Languages, CaseSensitive, Sparkles, FileText, AlignLeft, ListChecks } from "lucide-react";
 
 type Item={title:string;desc:string;icon:React.ReactNode;href:string;tag:string};
 type SubjectData={title:string;desc:string;intro:string;items:Item[];};
 const data:Record<string,SubjectData>={
  arabic:{title:"اللغة العربية",desc:"مساحة متكاملة لتعليم القراءة والكتابة والإملاء والقواعد، خطوة بخطوة.",intro:"اختر المجال التعليمي، ثم انتقل إلى المهارة التي تريد تدريب التلاميذ عليها.",items:[
- {title:"الحروف الهجائية",desc:"التعرّف على الحروف وأشكالها وأصواتها، وكتابتها في مواضع الكلمة.",icon:<ALargeSmall/>,href:"/activities?skill=arabic_letters",tag:"الحرف وأشكاله"},
+ {title:"الحروف وأشكالها",desc:"تعلّم شكل الحرف في بداية الكلمة ووسطها ونهايتها، والتعرّف على صوته.",icon:<ALargeSmall/>,href:"/activities?skill=arabic_letters",tag:"الحرف وأشكاله"},
  {title:"الحركات والتشكيل",desc:"الفتحة والضمة والكسرة والسكون والشدة والتنوين مع أمثلة وتدريبات.",icon:<AudioLines/>,href:"/activities?skill=harakat",tag:"الضبط والنطق"},
  {title:"الإملاء والتصحيح",desc:"التدرّب على كتابة الكلمات والجمل والفقرات والنصوص، ومراجعة الأخطاء.",icon:<SpellCheck/>,href:"/activities?skill=dictation",tag:"الكتابة السليمة"},
  {title:"أقسام الكلام",desc:"تمييز الاسم والفعل والحرف داخل الكلمات والجمل.",icon:<Languages/>,href:"/activities?skill=parts_of_speech",tag:"أساسيات اللغة"},
  {title:"المذكر والمؤنث",desc:"التعرّف على علامات التذكير والتأنيث والتمييز بينهما.",icon:<CaseSensitive/>,href:"/activities?skill=gender",tag:"بناء الكلمات"},
  {title:"المفرد والمثنى",desc:"فهم المفرد والمثنى وكيفية تحويل الاسم من مفرد إلى مثنى.",icon:<ListChecks/>,href:"/activities?skill=dual",tag:"التثنية"},
  {title:"القراءة والكلمات",desc:"قراءة الكلمات وفهم معانيها واستعمالها في جمل مفيدة.",icon:<BookOpen/>,href:"/activities?skill=reading",tag:"الفهم القرائي"},
- {title:"الخط والكتابة",desc:"التدرّب على رسم الحروف وكتابة الكلمات بخط واضح.",icon:<PencilLine/>,href:"/activities?skill=handwriting",tag:"مهارات الكتابة"},
+ {title:"تعليم كتابة الحرف",desc:"تدرّب على رسم الحرف خطوة بخطوة، مع الانتباه إلى اتجاه الكتابة والنقاط.",icon:<PencilLine/>,href:"/activities?skill=handwriting",tag:"مهارات الكتابة"},
  {title:"التقييمات",desc:"اختبارات قصيرة تجمع المهارات التي تعلمها التلميذ.",icon:<ClipboardCheck/>,href:"/activities?skill=arabic_quiz",tag:"قياس التعلّم"}
  ]},
  math:{title:"الرياضيات",desc:"نكتشف عالم الأعداد ونفهم العمليات ونحلّ المسائل خطوة بخطوة.",intro:"اختر المجال الرياضي الذي تريد تدريسه.",items:[
